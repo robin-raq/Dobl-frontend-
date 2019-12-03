@@ -3,9 +3,31 @@ let compCard = document.querySelector("#comp-circle")
 
 let userCard = document.querySelector("#user-circle")
 let compArray = []
-let scoreCard = document.createElement("span")
-scoreCard.innerText = 0
-deckArea.append(scoreCard)
+let scoreCard = document.createElement("div")
+scoreCard.innerText = "Score: "
+let score = document.createElement("span")
+score.innerText = 0
+scoreCard.append(score)
+
+let timer = document.createElement("div")
+timer.innerText = "Time Remaining: "
+let timeLeft = document.createElement("span")
+timeLeft.innerText = 60
+timer.append(timeLeft)
+
+let myTimer = setInterval("runTimer(timeLeft)", 100)
+
+function runTimer(element){
+    element.innerText --
+
+    if (element.innerText < 0) {
+       clearInterval(myTimer)
+       alert("Time's up!")
+    }
+}
+
+
+deckArea.append(scoreCard, timer)
 
 
 deckArea.prepend(compCard)
@@ -113,7 +135,7 @@ userCard.addEventListener("click", (evt) => {
 
     if (compArray.includes(clickedIcon)){
 
-        ++scoreCard.innerText 
+        ++score.innerText 
         console.log(scoreCard.innerText)
         createCompCard()
         createUserCard()
