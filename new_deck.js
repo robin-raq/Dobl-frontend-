@@ -58,18 +58,25 @@ Card56:["💩", "☎️"," 🎰"," 🛶", "🍄", "🐙", "🖥", "🎒"],
 Card57:["💩", "🚽"," 🌎"," 🗽", "🌈", "🧤", "🔒", "🥁"]
 
 }
+// let deckArea = document.getElementById("deck")
 
-let cardDiv = document.querySelector(".deck")
-cardDiv.innerText = randomProperty(deck)
+// let compCard = document.createElement("div")
+// compCard.innerText = randomProperty(deck)
+// compCard.id = "comp-text"
 
-deck.Card01
-// gameBoard.append(cardDiv)
-console.log(deck)
 
-function randomProperty(obj) {
-    var keys = Object.keys(obj)
-    return obj[keys[ keys.length * Math.random() << 0]];
-};
+// let userCard = document.createElement("div")
+// userCard.innerText = randomProperty(deck)
+// userCard.id = "user-text"
+
+// deckArea.append(compCard, userCard)
+
+// console.log(deck)
+
+// function randomProperty(obj) {
+//     var keys = Object.keys(obj)
+//     return obj[keys[ keys.length * Math.random() << 0]];
+// };
 
 // function startGame() {
 //     myGameArea.start();
