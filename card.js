@@ -1,6 +1,11 @@
 let deckArea = document.getElementById("deck")
 let compCard = document.querySelector("#comp-circle")
+
 let userCard = document.querySelector("#user-circle")
+let compArray = []
+let scoreCard = document.createElement("span")
+scoreCard.innerText = 0
+deckArea.append(scoreCard)
 
 
 deckArea.prepend(compCard)
@@ -9,8 +14,10 @@ createCompCard()
 createUserCard()
 
 function createCompCard(){
+    compCard.innerHTML = " "
     let compPosOne = document.createElement("div")
     compPosOne.className = "pos-one"
+
 
     let compPosTwo = document.createElement("div")
     compPosTwo.className = "pos-two"
@@ -33,15 +40,18 @@ function createCompCard(){
     let compPosEight = document.createElement("div")
     compPosEight.className = "pos-eight"
 
-    randomProperty(deck, compPosOne, compPosTwo, compPosThree, compPosFour, compPosFive, compPosSix, compPosSeven, compPosEight)
+    compArray = randomProperty(deck, compPosOne, compPosTwo, compPosThree, compPosFour, compPosFive, compPosSix, compPosSeven, compPosEight)
+    console.log(compArray)
     compCard.append(compPosOne, compPosTwo, compPosThree, compPosFour, compPosFive, compPosSix, compPosSeven, compPosEight)
 }
 
 function randomProperty(obj, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight) {
     var keys = Object.keys(obj)
     let arrayOfRandomEmojis = obj[keys[ keys.length * Math.random() << 0]]
+    
 
     getEachEmoji(arrayOfRandomEmojis, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight)
+    return arrayOfRandomEmojis
 };
 
 function getEachEmoji(array, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight) {
@@ -57,8 +67,13 @@ function getEachEmoji(array, posOne, posTwo, posThree, posFour, posFive, posSix,
 }
 
 function createUserCard(){
+    userCard.innerHTML = " "
     let userPosOne = document.createElement("div")
     userPosOne.className = "pos-one"
+    userPosOne.addEventListener("click", (event) => {
+        console.log()
+    })
+
 
     let userPosTwo = document.createElement("div")
     userPosTwo.className = "pos-two"
@@ -85,3 +100,27 @@ function createUserCard(){
 
     userCard.append(userPosOne, userPosTwo, userPosThree, userPosFour, userPosFive, userPosSix, userPosSeven, userPosEight)
 }
+
+function clickedEmoji(){
+    console.log()
+
+}
+
+userCard.addEventListener("click", (evt) => {
+    //console.log(evt.target)
+    let clickedIcon = evt.target.innerText
+    console.log(clickedIcon)
+
+    if (compArray.includes(clickedIcon)){
+
+        ++scoreCard.innerText 
+        console.log(scoreCard.innerText)
+        createCompCard()
+        createUserCard()
+    } 
+    else {
+        alert("that is not a match")
+    }
+    
+    
+})
