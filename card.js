@@ -1,8 +1,7 @@
 let deckArea = document.getElementById("deck")
 let compCard = document.querySelector("#comp-circle")
-
 let userCard = document.querySelector("#user-circle")
-let compArray = []
+
 let scoreCard = document.createElement("div")
 scoreCard.innerText = "Score: "
 let score = document.createElement("span")
@@ -15,22 +14,103 @@ let timeLeft = document.createElement("span")
 timeLeft.innerText = 60
 timer.append(timeLeft)
 
-let myTimer = setInterval("runTimer(timeLeft)", 100)
+let compArray = []
+
+
+let myTimer = setInterval("runTimer(timeLeft)", 10)
 
 function runTimer(element){
     element.innerText --
 
-    if (element.innerText < 0) {
+    if (element.innerText <= 0) {
+        
+        stopGamePlay()
+        
        clearInterval(myTimer)
-       alert("Time's up!")
+       
+       
     }
+
+}
+
+function stopGamePlay(){
+    //alert("Time's up!")
+    //userCard.innerHTML = 'GAME OVER'
+    
+    userCard.remove()
+    compCard.remove()
+    
+    let newGameButton = document.createElement("button")
+    newGameButton.className = "end_buttons"
+    newGameButton.innerText = "Play Again"
+    let saveScoreForm = document.createElement("form")
+    saveScoreForm.className = "score_form"
+   
+    let inputArea = document.createElement("INPUT")
+    inputArea.type = "text"
+    inputArea.name = "player_name"
+    inputArea.placeholder = "ENTER NAME"
+    let submitButton = document.createElement("Input")
+        submitButton.type = "submit"
+        submitButton.label = "Save Score"
+    
+    
+    saveScoreForm.append(inputArea, submitButton)
+    deckArea.append(saveScoreForm, newGameButton)
+
+    saveScoreForm.addEventListener("submit", (evt) => {
+        evt.preventDefault()
+        playerName = evt.target.player_name.value
+        playerScore = parseInt(score.innerText)
+
+        if (playerScore <= 300 ){
+            playerRewardId = 1
+         
+        }
+        else if (playerScore <= 600 && playerScore > 300){
+            playerRewardId = 2
+        }
+        else if (playerScore <= 900 && playerScore > 600){
+            playerRewardId = 3
+        }
+        else if (playerScore <= 1200 && playerScore > 900){
+            playerRewardId = 4
+        }
+        else if (playerScore <= 1500 && playerScore > 1200){
+            playerRewardId = 5
+        }
+        else{
+            playerRewardId = 6
+        }
+        
+
+
+
+        fetch(`http://localhost:3000/scores`, {
+          method:'POST',
+         headers: { 
+             'Content-type': 'application/json',
+             'accept': 'application/json'
+         },
+         body: JSON.stringify({
+            name: playerName,
+            value: playerScore,
+            reward_id: playerRewardId
+          })
+        })
+        .then(resp => resp.json())
+        .then(json_resp =>{
+            console.log(json_resp)})
+        
+    })
+
 }
 
 
-deckArea.append(scoreCard, timer)
+deckArea.append(scoreCard, timer, compCard, userCard)
 
 
-deckArea.prepend(compCard)
+//deckArea.prepend(compCard)
 
 createCompCard()
 createUserCard()
@@ -92,11 +172,7 @@ function createUserCard(){
     userCard.innerHTML = " "
     let userPosOne = document.createElement("div")
     userPosOne.className = "pos-one"
-    userPosOne.addEventListener("click", (event) => {
-        console.log()
-    })
-
-
+    
     let userPosTwo = document.createElement("div")
     userPosTwo.className = "pos-two"
 
@@ -123,10 +199,7 @@ function createUserCard(){
     userCard.append(userPosOne, userPosTwo, userPosThree, userPosFour, userPosFive, userPosSix, userPosSeven, userPosEight)
 }
 
-function clickedEmoji(){
-    console.log()
 
-}
 
 userCard.addEventListener("click", (evt) => {
     //console.log(evt.target)
@@ -134,8 +207,11 @@ userCard.addEventListener("click", (evt) => {
     console.log(clickedIcon)
 
     if (compArray.includes(clickedIcon)){
+        let scoreNum = parseInt(score.innerText)
+        scoreNum += 100
 
-        ++score.innerText 
+       //++score.innerText
+       score.innerText = scoreNum
         console.log(scoreCard.innerText)
         createCompCard()
         createUserCard()
