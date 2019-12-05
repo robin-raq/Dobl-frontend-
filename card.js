@@ -2,13 +2,31 @@ let deckArea = document.getElementById("deck")
 let compCard = document.querySelector("#comp-circle")
 let userCard = document.querySelector("#user-circle")
 
+let titleHOne = document.querySelector("h1")
+
+let scoreFormDiv = document.createElement("div")
+scoreFormDiv.className = "form-div"
+
+let endButtonDiv = document.createElement("div")
+endButtonDiv.className = "end-button-div"
+
+let resetButton = document.createElement("button")
+resetButton.className = "start-over-button"
+resetButton.innerText = "Start Over"
+resetButton.addEventListener("click", (params) => {
+    window.location.reload(true);
+})
+
+
 let scoreCard = document.createElement("div")
+scoreCard.className = "score-class"
 scoreCard.innerText = "Score: "
 let score = document.createElement("span")
 score.innerText = 0
 scoreCard.append(score)
 
 let timer = document.createElement("div")
+timer.className = "timer-class"
 timer.innerText = "Time Remaining: "
 let timeLeft = document.createElement("span")
 timeLeft.innerText = 60
@@ -17,7 +35,7 @@ timer.append(timeLeft)
 let compArray = []
 
 
-let myTimer = setInterval("runTimer(timeLeft)", 10)
+let myTimer = setInterval("runTimer(timeLeft)", 1000)
 
 function runTimer(element){
     element.innerText --
@@ -36,38 +54,46 @@ function runTimer(element){
 function stopGamePlay(){
     //alert("Time's up!")
     //userCard.innerHTML = 'GAME OVER'
+
+    resetButton.remove()
+
+    titleHOne.innerText = "GAME OVER!"
+
+    scoreCard.className = "final-score-class"
+
+    timer.remove()
     
-    // userCard.remove()
-    // compCard.remove()
+    userCard.remove()
+    compCard.remove()
     
     let newGameButton = document.createElement("button")
     newGameButton.className = "end_buttons"
     newGameButton.innerText = "Play Again"
-    newGameButton.addEventListener("click", (evt) => {
-        createCompCard()
-        createUserCard()
-        timeLeft.innerText = 60
-        setInterval("runTimer(timeLeft)", 10)
-        score.innerText = 0
-    })
+    endButtonDiv.append(newGameButton)
 
+// event listener to reset page
+    newGameButton.addEventListener("click", () => {
+        window.location.reload(true);
+        
+    })
 
 
 
     let saveScoreForm = document.createElement("form")
     saveScoreForm.className = "score_form"
-   
+    
     let inputArea = document.createElement("INPUT")
     inputArea.type = "text"
     inputArea.name = "player_name"
     inputArea.placeholder = "ENTER NAME"
     let submitButton = document.createElement("Input")
-        submitButton.type = "submit"
-        submitButton.label = "Save Score"
+    submitButton.type = "submit"
+    
     
     
     saveScoreForm.append(inputArea, submitButton)
-    deckArea.append(saveScoreForm, newGameButton)
+    scoreFormDiv.append(saveScoreForm)
+    deckArea.append(scoreFormDiv, endButtonDiv)
 
     saveScoreForm.addEventListener("submit", (evt) => {
         evt.preventDefault()
@@ -76,7 +102,6 @@ function stopGamePlay(){
 
         if (playerScore <= 300 ){
             playerRewardId = 1
-         
         }
         else if (playerScore <= 600 && playerScore > 300){
             playerRewardId = 2
@@ -111,14 +136,35 @@ function stopGamePlay(){
         })
         .then(resp => resp.json())
         .then(json_resp =>{
-            console.log(json_resp)})
+            //console.log(json_resp.reward)
+            titleHOne.remove()
+            scoreCard.remove()
+            scoreFormDiv.remove()
+
+            newGameButton.className = "large-end-button"
+
+
+            let rewardDiv = document.createElement("div")
+            rewardDiv.className = "reward-div"
+
+            rewardDiv.innerText = `Good job. Here's some ${json_resp.reward.name}.`
+        
+
+            // rewardDiv.innerText = `Congratulations ${playerName}! You've earned ${json_resp.reward.name}. `
+            let rewardImg = document.createElement("img")
+            rewardImg.src = json_resp.reward.image
+
+            rewardDiv.append(rewardImg)
+            deckArea.prepend(rewardDiv)
+        
+        })
         
     })
 
 }
 
 
-deckArea.append(scoreCard, timer, compCard, userCard)
+deckArea.append(scoreCard, timer, compCard, userCard, resetButton)
 
 
 //deckArea.prepend(compCard)
@@ -182,28 +228,28 @@ function getEachEmoji(array, posOne, posTwo, posThree, posFour, posFive, posSix,
 function createUserCard(){
     userCard.innerHTML = " "
     let userPosOne = document.createElement("div")
-    userPosOne.className = "pos-one"
+    userPosOne.className = "u-pos-one"
     
     let userPosTwo = document.createElement("div")
-    userPosTwo.className = "pos-two"
+    userPosTwo.className = "u-pos-two"
 
     let userPosThree = document.createElement("div")
-    userPosThree.className = "pos-three"
+    userPosThree.className = "u-pos-three"
     
     let userPosFour = document.createElement("div")
-    userPosFour.className = "pos-four"
+    userPosFour.className = "u-pos-four"
 
     let userPosFive = document.createElement("div")
-    userPosFive.className = "pos-five"
+    userPosFive.className = "u-pos-five"
 
     let userPosSix = document.createElement("div")
-    userPosSix.className = "pos-six"
+    userPosSix.className = "u-pos-six"
 
     let userPosSeven = document.createElement("div")
-    userPosSeven.className = "pos-seven"
+    userPosSeven.className = "u-pos-seven"
 
     let userPosEight = document.createElement("div")
-    userPosEight.className = "pos-eight"
+    userPosEight.className = "u-pos-eight"
 
     randomProperty(deck, userPosOne, userPosTwo, userPosThree, userPosFour, userPosFive, userPosSix, userPosSeven, userPosEight)
 
