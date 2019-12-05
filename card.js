@@ -37,12 +37,23 @@ function stopGamePlay(){
     //alert("Time's up!")
     //userCard.innerHTML = 'GAME OVER'
     
-    userCard.remove()
-    compCard.remove()
+    // userCard.remove()
+    // compCard.remove()
     
     let newGameButton = document.createElement("button")
     newGameButton.className = "end_buttons"
     newGameButton.innerText = "Play Again"
+    newGameButton.addEventListener("click", (evt) => {
+        createCompCard()
+        createUserCard()
+        timeLeft.innerText = 60
+        setInterval("runTimer(timeLeft)", 10)
+        score.innerText = 0
+    })
+
+
+
+
     let saveScoreForm = document.createElement("form")
     saveScoreForm.className = "score_form"
    
@@ -143,7 +154,7 @@ function createCompCard(){
     compPosEight.className = "pos-eight"
 
     compArray = randomProperty(deck, compPosOne, compPosTwo, compPosThree, compPosFour, compPosFive, compPosSix, compPosSeven, compPosEight)
-    console.log(compArray)
+    // console.log(compArray)
     compCard.append(compPosOne, compPosTwo, compPosThree, compPosFour, compPosFive, compPosSix, compPosSeven, compPosEight)
 }
 
