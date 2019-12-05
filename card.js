@@ -17,7 +17,7 @@ timer.append(timeLeft)
 let compArray = []
 
 
-let myTimer = setInterval("runTimer(timeLeft)", 10)
+let myTimer = setInterval("runTimer(timeLeft)", 1000)
 
 function runTimer(element){
     element.innerText --
@@ -43,6 +43,15 @@ function stopGamePlay(){
     let newGameButton = document.createElement("button")
     newGameButton.className = "end_buttons"
     newGameButton.innerText = "Play Again"
+
+// event listener to reset page
+    newGameButton.addEventListener("click", () => {
+        window.location.reload(true);
+        
+    })
+
+
+
     let saveScoreForm = document.createElement("form")
     saveScoreForm.className = "score_form"
    
@@ -52,7 +61,7 @@ function stopGamePlay(){
     inputArea.placeholder = "ENTER NAME"
     let submitButton = document.createElement("Input")
         submitButton.type = "submit"
-        submitButton.label = "Save Score"
+        
     
     
     saveScoreForm.append(inputArea, submitButton)
@@ -100,7 +109,16 @@ function stopGamePlay(){
         })
         .then(resp => resp.json())
         .then(json_resp =>{
-            console.log(json_resp)})
+            //console.log(json_resp.reward)
+            let rewardDiv = document.createElement("div")
+            rewardDiv.innerText = `Congratulations ${playerName}! You've earned ${json_resp.reward.name}. `
+            let rewardImg = document.createElement("img")
+            rewardImg.src = json_resp.reward.image
+
+            rewardDiv.append(rewardImg)
+            deckArea.append(rewardDiv)
+        
+        })
         
     })
 
