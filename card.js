@@ -1,6 +1,8 @@
 let deckArea = document.getElementById("deck")
 let compCard = document.querySelector("#comp-circle")
 let userCard = document.querySelector("#user-circle")
+let resetButton = document.createElement("button")
+resetButton.innerText = 'Start New Game'
 
 let scoreCard = document.createElement("div")
 scoreCard.innerText = "Score: "
