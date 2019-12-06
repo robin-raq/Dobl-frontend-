@@ -9,15 +9,18 @@ let scoreFormDiv = document.createElement("div")
     scoreFormDiv.className = "form-div"
 
 let endButtonDiv = document.createElement("div")
-    endButtonDiv.className = "end-button-div"
+endButtonDiv.className = "end-button-div"
 
-let scoresUL = document.createElement("ul")
+// let scoresUL = document.createElement("ul")
+let highScoresDiv = document.createElement("div")
+highScoresDiv.className = "high-scores-div"
 
 let scoreButtonDiv = document.createElement("div")
-    scoreButtonDiv.className = "end-button-div"
+scoreButtonDiv.className = "end-button-div"
 
 let rewardDiv = document.createElement("div")
-    rewardDiv.className = "reward-div"
+rewardDiv.className = "reward-div"
+
 
 let resetButton = document.createElement("button")
     resetButton.className = "start-over-button"
@@ -44,7 +47,7 @@ let timeLeft = document.createElement("span")
 let compArray = []
 
 
-let myTimer = setInterval("runTimer(timeLeft)", 1000)
+let myTimer = setInterval("runTimer(timeLeft)", 10)
 
 function runTimer(element){
     element.innerText --
@@ -89,7 +92,7 @@ function stopGamePlay(){
     
     //view scores button
     let viewScoreButton = document.createElement("button")
-    viewScoreButton.className = "end_buttons"
+    viewScoreButton.className = "large-end-button"
     viewScoreButton.innerText = "View High Scores"
     scoreButtonDiv.append(viewScoreButton)
 
@@ -164,8 +167,6 @@ function stopGamePlay(){
             newGameButton.className = "large-end-button"
 
 
-            let rewardDiv = document.createElement("div")
-            rewardDiv.className = "reward-div"
 
 
             let rewardTextDiv = document.createElement("div")
@@ -307,6 +308,8 @@ userCard.addEventListener("click", (evt) => {
 
 scoreButtonDiv.addEventListener("click", (evt) => {
     //console.log(evt.target)
+    rewardDiv.remove()
+
 
     fetch("http://localhost:3000/scores")
     .then(r => r.json())
@@ -328,11 +331,27 @@ scoreButtonDiv.addEventListener("click", (evt) => {
 function displayScores(scoreObj){
 
     rewardDiv.remove()
+    scoreButtonDiv.remove()
+    console.log(scoreButtonDiv)
+    // highScoresDiv.remove()
     
-    let scoreLi = document.createElement("li")
-        scoreLi.innerText = `${scoreObj.name} w/ ${scoreObj.value} points`
-        scoresUL.append(scoreLi)
-        deckArea.append(scoresUL)
+    let scoreDiv = document.createElement("div")
+        scoreDiv.className = "each-score-div"
+
+        let scoreNameSpan = document.createElement("span")
+        scoreNameSpan.innerText = `Name: ${scoreObj.name}`
+
+        let divBreak = document.createElement("br")
+
+        let scoreValueSpan = document.createElement("span")
+        scoreValueSpan.innerText = `Points: ${scoreObj.value}`
+
+        scoreDiv.append(scoreNameSpan, divBreak, scoreValueSpan)
+        // scoreLi.innerText = `${scoreObj.name} w/ ${scoreObj.value} points`
+        highScoresDiv.append(scoreDiv)
+        deckArea.prepend(highScoresDiv)
+
+     
 
 
 }
