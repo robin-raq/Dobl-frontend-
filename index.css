@@ -30,6 +30,7 @@ body {
     color: white;
     font-family: VT; 
     text-align: center;
+    font-size: 50px;
   }
 
 
@@ -245,6 +246,7 @@ input[type=submit] {
     font-family: VT;
     border-radius: 4px;
   width: 100%;
+  margin: 8px;
 }
 
 .start-over-button {
@@ -259,3 +261,47 @@ input[type=submit] {
   font-family: VT;
   border-radius: 4px;
 }
+
+.reward-text-div {
+  text-align: center;
+}
+
+.high-scores-div {
+  text-align: center;
+  font-family: VT;
+  font-size: 20px;
+  color: white;
+  border: 2px solid white;
+  border-radius: 4px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  background:rgba(255,255,255,0.3);
+  height: 200px;
+   overflow: auto;
+}
+
+.each-score-div {
+  padding: 1px 10px;
+  margin: 8px 0;
+}
+
+/* .score-button-div {
+  background-color: white;
+  border: none;
+  color: gray;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: VT;
+  border-radius: 4px;
+  width: 100%;
+  margin: 8px 0;
+} */
+
+
+/* .each-score-div span{
+  padding: 12px 10px;
+  margin: 8px 0;
+} */
