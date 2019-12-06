@@ -30,6 +30,7 @@ body {
     color: white;
     font-family: VT; 
     text-align: center;
+    font-size: 50px;
   }
 
 
@@ -258,4 +259,8 @@ input[type=submit] {
   font-size: 16px;
   font-family: VT;
   border-radius: 4px;
+}
+
+.reward-text-div {
+  text-align: center;
 }

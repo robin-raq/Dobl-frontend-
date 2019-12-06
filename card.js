@@ -147,14 +147,17 @@ function stopGamePlay(){
             let rewardDiv = document.createElement("div")
             rewardDiv.className = "reward-div"
 
-            rewardDiv.innerText = `Good job. Here's some ${json_resp.reward.name}.`
+
+            let rewardTextDiv = document.createElement("div")
+            rewardTextDiv.className = "reward-text-div"
+            rewardTextDiv.innerText = `Good job. Here's some ${json_resp.reward.name}.`
         
 
             // rewardDiv.innerText = `Congratulations ${playerName}! You've earned ${json_resp.reward.name}. `
             let rewardImg = document.createElement("img")
             rewardImg.src = json_resp.reward.image
 
-            rewardDiv.append(rewardImg)
+            rewardDiv.append(rewardTextDiv, rewardImg)
             deckArea.prepend(rewardDiv)
         
         })
