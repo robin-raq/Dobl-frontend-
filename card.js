@@ -2,35 +2,44 @@ let deckArea = document.getElementById("deck")
 let compCard = document.querySelector("#comp-circle")
 let userCard = document.querySelector("#user-circle")
 
+
 let titleHOne = document.querySelector("h1")
 
 let scoreFormDiv = document.createElement("div")
-scoreFormDiv.className = "form-div"
+    scoreFormDiv.className = "form-div"
 
 let endButtonDiv = document.createElement("div")
-endButtonDiv.className = "end-button-div"
+    endButtonDiv.className = "end-button-div"
+
+let scoresUL = document.createElement("ul")
+
+let scoreButtonDiv = document.createElement("div")
+    scoreButtonDiv.className = "end-button-div"
+
+let rewardDiv = document.createElement("div")
+    rewardDiv.className = "reward-div"
 
 let resetButton = document.createElement("button")
-resetButton.className = "start-over-button"
-resetButton.innerText = "Start Over"
-resetButton.addEventListener("click", (params) => {
+    resetButton.className = "start-over-button"
+    resetButton.innerText = "Start Over"
+    resetButton.addEventListener("click", (params) => {
     window.location.reload(true);
 })
 
 
 let scoreCard = document.createElement("div")
-scoreCard.className = "score-class"
-scoreCard.innerText = "Score: "
+    scoreCard.className = "score-class"
+    scoreCard.innerText = "Score: "
 let score = document.createElement("span")
-score.innerText = 0
-scoreCard.append(score)
+    score.innerText = 0
+    scoreCard.append(score)
 
 let timer = document.createElement("div")
-timer.className = "timer-class"
-timer.innerText = "Time Remaining: "
+    timer.className = "timer-class"
+    timer.innerText = "Time Remaining: "
 let timeLeft = document.createElement("span")
-timeLeft.innerText = 60
-timer.append(timeLeft)
+    timeLeft.innerText = 60
+    timer.append(timeLeft)
 
 let compArray = []
 
@@ -65,17 +74,28 @@ function stopGamePlay(){
     
     userCard.remove()
     compCard.remove()
+
+    //new game button
     
     let newGameButton = document.createElement("button")
     newGameButton.className = "end_buttons"
     newGameButton.innerText = "Play Again"
     endButtonDiv.append(newGameButton)
 
-// event listener to reset page
+    // event listener to reset page
     newGameButton.addEventListener("click", () => {
         window.location.reload(true);
-        
     })
+    
+    //view scores button
+    let viewScoreButton = document.createElement("button")
+    viewScoreButton.className = "end_buttons"
+    viewScoreButton.innerText = "View High Scores"
+    scoreButtonDiv.append(viewScoreButton)
+
+
+
+
 
 
 
@@ -142,11 +162,6 @@ function stopGamePlay(){
             scoreFormDiv.remove()
 
             newGameButton.className = "large-end-button"
-
-
-            let rewardDiv = document.createElement("div")
-            rewardDiv.className = "reward-div"
-
             rewardDiv.innerText = `Good job. Here's some ${json_resp.reward.name}.`
         
 
@@ -156,6 +171,8 @@ function stopGamePlay(){
 
             rewardDiv.append(rewardImg)
             deckArea.prepend(rewardDiv)
+            deckArea.append(scoreButtonDiv)
+
         
         })
         
@@ -279,3 +296,37 @@ userCard.addEventListener("click", (evt) => {
     
     
 })
+
+scoreButtonDiv.addEventListener("click", (evt) => {
+    //console.log(evt.target)
+
+    fetch("http://localhost:3000/scores")
+    .then(r => r.json())
+    .then((allScores) => {
+        
+      let sorted =  allScores.sort((a,b) => {
+            return(b.value - a.value)
+        })
+        //console.log(sorted)
+        sorted.forEach((scoreObj) => {
+            displayScores(scoreObj)
+        })
+    })
+    
+})
+
+//function to display high scores
+
+function displayScores(scoreObj){
+
+    rewardDiv.remove()
+    
+    let scoreLi = document.createElement("li")
+        scoreLi.innerText = `${scoreObj.name} w/ ${scoreObj.value} points`
+        scoresUL.append(scoreLi)
+        deckArea.append(scoresUL)
+
+
+}
+
+
