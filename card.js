@@ -145,7 +145,7 @@ function stopGamePlay(){
 
 
 
-        fetch(`http://localhost:3000/scores`, {
+        fetch(`https://dobble-game.herokuapp.com/scores`, {
           method:'POST',
          headers: { 
              'Content-type': 'application/json',
@@ -311,7 +311,7 @@ scoreButtonDiv.addEventListener("click", (evt) => {
     rewardDiv.remove()
 
 
-    fetch("http://localhost:3000/scores")
+    fetch("https://dobble-game.herokuapp.com/scores")
     .then(r => r.json())
     .then((allScores) => {
         
