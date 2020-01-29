@@ -285,7 +285,7 @@ input[type=submit] {
   margin: 8px 0;
 }
 
-/* .score-button-div {
+.score-button-div {
   background-color: white;
   border: none;
   color: gray;
@@ -298,10 +298,10 @@ input[type=submit] {
   border-radius: 4px;
   width: 100%;
   margin: 8px 0;
-} */
+}
 
 
-/* .each-score-div span{
+each-score-div span{
   padding: 12px 10px;
   margin: 8px 0;
 } */

@@ -56,9 +56,7 @@ function runTimer(element){
         
         stopGamePlay()
         
-       clearInterval(myTimer)
-       
-       
+        clearInterval(myTimer)
     }
 
 }
@@ -78,23 +76,29 @@ function stopGamePlay(){
     userCard.remove()
     compCard.remove()
 
-    //new game button
-    
-    let newGameButton = document.createElement("button")
-    newGameButton.className = "end_buttons"
-    newGameButton.innerText = "Play Again"
-    endButtonDiv.append(newGameButton)
-
-    // event listener to reset page
-    newGameButton.addEventListener("click", () => {
-        window.location.reload(true);
-    })
     
     //view scores button
     let viewScoreButton = document.createElement("button")
     viewScoreButton.className = "large-end-button"
     viewScoreButton.innerText = "View High Scores"
     scoreButtonDiv.append(viewScoreButton)
+    
+    //new game button
+
+    
+    let newGameButton = document.createElement("button")
+    newGameButton.className = "end_buttons"
+    newGameButton.innerText = "Play Again"
+    endButtonDiv.append(newGameButton)
+
+    
+
+    // event listener to reset page
+    newGameButton.addEventListener("click", () => {
+        window.location.reload(true);
+    })
+    
+    
 
 
 
@@ -116,7 +120,7 @@ function stopGamePlay(){
     
     saveScoreForm.append(inputArea, submitButton)
     scoreFormDiv.append(saveScoreForm)
-    deckArea.append(scoreFormDiv, endButtonDiv)
+    deckArea.append(scoreFormDiv, endButtonDiv, scoreButtonDiv)
 
     saveScoreForm.addEventListener("submit", (evt) => {
         evt.preventDefault()
@@ -351,7 +355,7 @@ function displayScores(scoreObj){
         highScoresDiv.append(scoreDiv)
         deckArea.prepend(highScoresDiv)
 
-     
+
 
 
 }
