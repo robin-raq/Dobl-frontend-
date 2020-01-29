@@ -47,7 +47,7 @@ let timeLeft = document.createElement("span")
 let compArray = []
 
 
-let myTimer = setInterval("runTimer(timeLeft)", 10)
+let myTimer = setInterval("runTimer(timeLeft)", 1000)
 
 function runTimer(element){
     element.innerText --
