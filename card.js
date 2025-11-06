@@ -18,12 +18,15 @@ const scoreCard = createEl("div", "score-class", "Score: ")
 const score = createEl("span", null, "0")
 scoreCard.append(score)
 
-
 const resetButton = createEl("button", "start-over-button", "Start Over")
 resetButton.addEventListener("click", () => window.location.reload(true))
 
 const endButtonDiv= createEl("div", "end-button-div")
 const rewardDiv = createEl("div", "reward-div")
+
+const scoreFormDiv = createEl("div", "form-div")
+const scoresUL = createEl("ul")
+let scoreButtonDiv = createEl("div", "end-button-div")
 
 deckArea.append(instructions, scoreCard, timer,  compCard, userCard, resetButton,)
 
@@ -164,8 +167,18 @@ function stopGamePlay(){
     compCard.remove()
     resetButton.remove()
     instructions.remove()
-    titleHOne.innerText = "GAME OVER!"
-    const newGameButton= createEl("button", "end_buttons", "Play Again!")
+    showEndScreen()
+
+
+}
+function showEndScreen(){
+    titleHOne.innerText = "⏰ GAME OVER!"
+    const finalScore = parseInt(score.innerText)
+
+    deckArea.innerHTML = `
+    <div class="final-score-class">Your Score: ${finalScore}</div>
+  `;
+  const newGameButton= createEl("button", "end_buttons", "Play Again!")
     endButtonDiv.append(newGameButton)
     deckArea.append(endButtonDiv)
 
@@ -173,7 +186,6 @@ function stopGamePlay(){
         window.location.reload(true);
     })
 }
-
 
 
 
@@ -186,13 +198,14 @@ function stopGamePlay(){
 
 // let scoreFormDiv = document.createElement("div")
 //     scoreFormDiv.className = "form-div"
+// let scoreButtonDiv = document.createElement("div")
+// scoreButtonDiv.className = "end-button-div"
 
 // // let scoresUL = document.createElement("ul")
 // let highScoresDiv = document.createElement("div")
 // highScoresDiv.className = "high-scores-div"
 
-// let scoreButtonDiv = document.createElement("div")
-// scoreButtonDiv.className = "end-button-div"
+
 
 
 
