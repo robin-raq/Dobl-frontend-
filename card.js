@@ -9,6 +9,7 @@ const userCard = document.querySelector("#user-circle");
 const titleHOne = document.querySelector("h1");
 
 //=== Game UI Elements ===
+const instructions = createEl("p", "glow", "Click matching icon on lower deck to play!!")
 const timer =createEl("div", "timer-class", "Time Remaining: ")
 const timeLeft= createEl("span", null, "60")
 timer.append(timeLeft)
@@ -23,7 +24,7 @@ resetButton.addEventListener("click", () => window.location.reload(true))
 const endButtonDiv= createEl("div", "end-button-div")
 const rewardDiv = createEl("div", "reward-div")
 
-deckArea.append(scoreCard, timer, resetButton, compCard, userCard)
+deckArea.append(instructions, scoreCard, timer, resetButton, compCard, userCard)
 
 // =====================
 // Utility Functions
