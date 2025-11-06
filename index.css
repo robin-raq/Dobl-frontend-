@@ -211,9 +211,24 @@ p.glow {
   margin: 3%;
 }
 .score-class {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
   color: white;
   font-family: VT;
   font-size: 30px;
+}
+.score-class input[type="text"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  font-family: VT;
+  font-size: 16px;
+  outline: none;
 }
 
 .timer-class {
@@ -255,11 +270,23 @@ input[type="submit"] {
   display: inline-block;
   font-size: 16px;
   font-family: VT;
-  border-radius: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.end_buttons.save {
+  padding-top: 10 px;
+}
+.end_buttons:hover {
+  background-color: #ffb6c1;
+  color: white;
+  transform: scale(1.05);
 }
 
 .form-div {
+  display: flex;
   text-align: center;
+  margin-top: rem;
 }
 
 .end-button-div {

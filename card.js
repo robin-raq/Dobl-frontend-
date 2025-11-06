@@ -43,7 +43,7 @@ deckArea.append(
 function createEl(tag, className, text) {
   const el = document.createElement(tag);
   if (className) el.className = className;
-  if (text) el.innerText = text;
+  if (text) el.textContent = text;
   return el;
 }
 
@@ -175,12 +175,6 @@ function stopGamePlay() {
 }
 function showEndScreen() {
   titleHOne.innerText = "⏰ GAME OVER!";
-
-
-  const newGameButton = createEl("button", "end_buttons", "Play Again!");
-  newGameButton.addEventListener("click", () => {
-    window.location.reload(true);
-  });
   generateScoreForm();
 
 
@@ -197,8 +191,13 @@ function generateScoreForm() {
   inputArea.name = "player_name";
   inputArea.placeholder = "ENTER NAME";
 
-  const saveScoreButton = createEl("button", "end_buttons", "Save Score");
+  const saveScoreButton = createEl("button", "end_buttons save", "Save Score");
   saveScoreButton.type = "submit";
+  saveScoreForm.addEventListener("submit", (evt) => {
+    evt.preventDefault()
+    saveScore()
+
+  })
   const newGameButton = createEl("button", "end_buttons", "Play Again!");
   newGameButton.addEventListener("click", () => {
     window.location.reload(true);
@@ -207,4 +206,9 @@ function generateScoreForm() {
   saveScoreForm.append(scoreFormLabel, inputArea, endButtonDiv);
   scoreFormDiv.append(saveScoreForm);
   deckArea.append(scoreFormDiv);
+}
+
+function saveScore(){
+
+console.log("Score Saved");
 }
