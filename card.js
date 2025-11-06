@@ -112,8 +112,19 @@ setTimeout(() => score.classList.remove('animate'), 500);
         createUserCard()
     }
     else {
-        alert("that is not a match")
+        showBadMatchPopup()
     }
+}
+function showBadMatchPopup() {
+  Swal.fire({
+    title: "Oops! ❌",
+    text: "That is NOT a match!",
+    icon: "error",
+    background: "#1a1a2e",       // your dark background
+    color: "#ffffff",             // text color
+    timer: 1500,                  // auto‑close after 1.5 seconds
+    showConfirmButton: false      // hides the button so it auto closes
+  });
 }
 
 // =====================
