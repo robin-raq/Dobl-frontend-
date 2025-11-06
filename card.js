@@ -87,16 +87,12 @@ function randomProperty(obj, ...positions) {
     getEachEmoji(arrayOfRandomEmojis, ...positions)
     return arrayOfRandomEmojis
 };
-function getEachEmoji(array, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight) {
-    posOne.innerText = array[0]
-    posTwo.innerText = array[1]
-    posThree.innerText = array[2]
-    posFour.innerText = array[3]
-    posFive.innerText = array[4]
-    posSix.innerText = array[5]
-    posSeven.innerText = array[6]
-    posEight.innerText = array[7]
+function getEachEmoji(array, ...positions) {
+  for (let i = 0; i < positions.length; i++) {
+    positions[i].innerText = array[i];
+  }
 }
+
 // =====================
 // Click + Score Logic
 // =====================
