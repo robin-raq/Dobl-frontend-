@@ -1,15 +1,128 @@
-let deckArea = document.getElementById("deck")
-let compCard = document.querySelector("#comp-circle")
-let userCard = document.querySelector("#user-circle")
+// =====================
+// Dobble Online - Modernized Card.js
+// =====================
+
+// === DOM References ===
+const deckArea = document.getElementById("deck");
+const compCard = document.querySelector("#comp-circle");
+const userCard = document.querySelector("#user-circle");
+const titleHOne = document.querySelector("h1");
+
+//=== Game UI Elements ===
+const timer =createEl("div", "timer-class", "Time Remaining: ")
+const timeLeft= createEl("span", null, "60")
+timer.append(timeLeft)
+
+const scoreCard = createEl("div", "score-class", "Score: ")
+const score = createEl("span", null, "0")
+scoreCard.append(score)
+
+const resetButton = createEl("button", "start-over-button", "Start Over")
+resetButton.addEventListener("click", () => window.location.reload(true))
+
+const endButtonDiv= createEl("div", "end-button-div")
+const rewardDiv = createEl("div", "reward-div")
+
+deckArea.append(scoreCard, timer, resetButton, compCard, userCard)
+
+// === Game State ===
+let compArray = [];
+let myTimer = null;
+
+// =====================
+// Game Setup
+// =====================
+
+function initGame() {
+  compArray = createCard(compCard, "pos");
+  createCard(userCard, "u-pos");
+  startTimer();
+  userCard.addEventListener("click", handleCardClick);
+}
+// =====================
+// Card Logic
+// =====================
+
+function createCompCard(){
+    compCard.innerHTML = "";
+    compPositions = []
+    let i =1
+    while(i <=8){
+        const div =  createEl("div", `pos-${i}`)
+        compPositions.push(div)
+        i++
+    }
+    compArray = randomProperty(deck, ...compPositions)
+    compPositions.forEach(pos => compCard.append(pos))
+}
+function createUserCard(){
+    userCard.innerHTML = "";
+    userPositions = []
+    let i =1
+    while(i <=8){
+        const div =  createEl("div", `u-pos-${i}`)
+        userPositions.push(div)
+        i++
+    }
+    randomProperty(deck, ...userPositions)
+    userPositions.forEach(pos => userCard.append(pos))
+}
+// Card Logic Helper Function //
+
+function randomProperty(obj, ...positions) {
+    const keys = Object.keys(obj)
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+    const arrayOfRandomEmojis = obj[randomKey];
+    getEachEmoji(arrayOfRandomEmojis, ...positions)
+    return arrayOfRandomEmojis
+};
+function getEachEmoji(array, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight) {
+    posOne.innerText = array[0]
+    posTwo.innerText = array[1]
+    posThree.innerText = array[2]
+    posFour.innerText = array[3]
+    posFive.innerText = array[4]
+    posSix.innerText = array[5]
+    posSeven.innerText = array[6]
+    posEight.innerText = array[7]
+}
+
+// =====================
+// Utility Functions
+// =====================
+
+function createEl(tag, className, text) {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (text) el.innerText = text;
+  return el;
+}
 
 
-let titleHOne = document.querySelector("h1")
+// =====================
+// Timer Logic
+// =====================
+
+function startTimer() {
+  if (myTimer) clearInterval(myTimer);
+  myTimer = setInterval(() => runTimer(), 1000);
+}
+
+function runTimer() {
+  let time = parseInt(timeLeft.innerText);
+  time -= 1;
+  timeLeft.innerText = time;
+
+  if (time <= 0) {
+    clearInterval(myTimer);
+    stopGamePlay();
+  }
+}
+
+
 
 let scoreFormDiv = document.createElement("div")
     scoreFormDiv.className = "form-div"
-
-let endButtonDiv = document.createElement("div")
-endButtonDiv.className = "end-button-div"
 
 // let scoresUL = document.createElement("ul")
 let highScoresDiv = document.createElement("div")
@@ -18,36 +131,21 @@ highScoresDiv.className = "high-scores-div"
 let scoreButtonDiv = document.createElement("div")
 scoreButtonDiv.className = "end-button-div"
 
-let rewardDiv = document.createElement("div")
-rewardDiv.className = "reward-div"
 
 
-let resetButton = document.createElement("button")
-    resetButton.className = "start-over-button"
-    resetButton.innerText = "Start Over"
-    resetButton.addEventListener("click", (params) => {
-    window.location.reload(true);
-})
 
 
-let scoreCard = document.createElement("div")
-    scoreCard.className = "score-class"
-    scoreCard.innerText = "Score: "
-let score = document.createElement("span")
-    score.innerText = 0
-    scoreCard.append(score)
-
-let timer = document.createElement("div")
-    timer.className = "timer-class"
-    timer.innerText = "Time Remaining: "
-let timeLeft = document.createElement("span")
-    timeLeft.innerText = 60
-    timer.append(timeLeft)
-
-let compArray = []
 
 
-let myTimer = setInterval("runTimer(timeLeft)", 1000)
+
+
+
+
+
+
+
+myTimer = setInterval(() => runTimer(timeLeft), 1000);
+
 
 function runTimer(element){
     element.innerText --
@@ -194,7 +292,7 @@ function stopGamePlay(){
 
 }
 
-deckArea.append(scoreCard, timer, compCard, userCard, resetButton)
+
 
 
 //deckArea.prepend(compCard)
@@ -202,7 +300,8 @@ deckArea.append(scoreCard, timer, compCard, userCard, resetButton)
 createCompCard()
 createUserCard()
 
-function createCompCard(){
+
+function createCompCard1(){
     compCard.innerHTML = " "
     let compPosOne = document.createElement("div")
     compPosOne.className = "pos-one"
@@ -234,28 +333,12 @@ function createCompCard(){
     compCard.append(compPosOne, compPosTwo, compPosThree, compPosFour, compPosFive, compPosSix, compPosSeven, compPosEight)
 }
 
-function randomProperty(obj, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight) {
-    var keys = Object.keys(obj)
-    let arrayOfRandomEmojis = obj[keys[ keys.length * Math.random() << 0]]
 
 
-    getEachEmoji(arrayOfRandomEmojis, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight)
-    return arrayOfRandomEmojis
-};
 
-function getEachEmoji(array, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight) {
-    posOne.innerText = array[0]
-    posTwo.innerText = array[1]
-    posThree.innerText = array[2]
-    posFour.innerText = array[3]
-    posFive.innerText = array[4]
-    posSix.innerText = array[5]
-    posSeven.innerText = array[6]
-    posEight.innerText = array[7]
 
-}
 
-function createUserCard(){
+function createUserCard1(){
     userCard.innerHTML = " "
     let userPosOne = document.createElement("div")
     userPosOne.className = "u-pos-one"
