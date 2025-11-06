@@ -58,36 +58,3 @@ Card56:["💩", "☎️","🎰","🔫", "🍄", "🐙", "🖥", "🚩"],
 Card57:["💩", "🚽","🌎","🗽", "🌈", "🧤", "🔒", "🥁"]
 
 }
-// let deckArea = document.getElementById("deck")
-
-// let compCard = document.createElement("div")
-// compCard.innerText = randomProperty(deck)
-// compCard.id = "comp-text"
-
-
-// let userCard = document.createElement("div")
-// userCard.innerText = randomProperty(deck)
-// userCard.id = "user-text"
-
-// deckArea.append(compCard, userCard)
-
-// console.log(deck)
-
-// function randomProperty(obj) {
-//     var keys = Object.keys(obj)
-//     return obj[keys[ keys.length * Math.random() << 0]];
-// };
-
-// function startGame() {
-//     myGameArea.start();
-// }
-
-// var myGameArea = {
-//     canvas : document.createElement("canvas"),
-//     start : function() {
-//         this.canvas.width = 480;
-//         this.canvas.height = 270;
-//         this.context = this.canvas.getContext("2d");
-//         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-//     }
-// }
