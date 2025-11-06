@@ -24,7 +24,7 @@ resetButton.addEventListener("click", () => window.location.reload(true))
 const endButtonDiv= createEl("div", "end-button-div")
 const rewardDiv = createEl("div", "reward-div")
 
-deckArea.append(instructions, scoreCard, timer, resetButton, compCard, userCard)
+deckArea.append(instructions, scoreCard, timer,  compCard, userCard, resetButton,)
 
 // =====================
 // Utility Functions
@@ -149,6 +149,7 @@ function stopGamePlay(){
     userCard.remove()
     compCard.remove()
     resetButton.remove()
+    instructions.remove()
     titleHOne.innerText = "GAME OVER!"
     const newGameButton= createEl("button", "end_buttons", "Play Again!")
     endButtonDiv.append(newGameButton)

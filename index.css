@@ -1,21 +1,12 @@
-body {
-    background-color: #fff;
-    background-image: url("https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80");
-    background-repeat: repeat;
-    background-size: cover;
-    /* opacity: 0.5 */
-  }
-  #comp-circle {
-    position: relative;
-    background-color: #001133;
-    background:rgba(255,255,255,0.3);
-    margin: 20px auto;
-    width: 175px;
-    height: 175px;
-    border-radius: 100px;
-  }
-
-  @font-face {
+/* =========================
+   Base Styles
+========================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+ @font-face {
     font-family: Monofett;
     src: url(https://fonts.gstatic.com/s/monofett/v9/mFTyWbofw6zc9NtnW73Vsx0J0kJ6.woff2) format('woff');
 
@@ -25,18 +16,67 @@ body {
     font-family: VT;
     src: url(https://fonts.gstatic.com/s/vt323/v11/pxiKyp0ihIEF2isfFJXUdVNF.woff2) format('woff');
   }
-
-  h1 {
-    color: white;
-    font-family: VT;
-    text-align: center;
-    font-size: 50px;
-  }
-
-
-  body {
+body {
+    font-family: 'VT323', monospace;
     background-color: #fff;
+    background-image: url("https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80");
+    background-repeat: repeat;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    /* opacity: 0.5 */
   }
+
+
+ h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6;
+}
+
+p.glow {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 6px #fff, 0 0 12px #ff4da6;
+  }
+  to {
+    text-shadow: 0 0 12px #fff, 0 0 24px #ff4da6;
+  }
+}
+/* =========================
+   Deck & Cards
+========================= */
+#deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+#comp-circle {
+    position: relative;
+    background-color: #001133;
+    background:rgba(255,255,255,0.3);
+    margin: 20px auto;
+    width: 175px;
+    height: 175px;
+    border-radius: 100px;
+  }
+
+
   #user-circle {
     position: relative;
     background-color: #001133;
@@ -59,10 +99,8 @@ body {
     flex-wrap: wrap-reverse;
     flex-direction: column;
     justify-content: space-evenly;
-    /* align-items: end; */
     align-content: center;
     margin: 100rem;
-
     box-sizing: border-box;
     width: 50%;
     border: 2px solid white;
@@ -70,7 +108,7 @@ body {
 
   }
 
-    .pos-1 {
+  .pos-1 {
     font-size: 16px;
     margin: 2%;
   }
