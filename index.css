@@ -70,45 +70,46 @@ body {
 
   }
 
-  .pos-one {
+    .pos-1 {
     font-size: 16px;
     margin: 2%;
   }
 
-  .pos-two {
+  .pos-2 {
     font-size: 50px;
     margin: 5%;
   }
-  .pos-seven {
+
+  .pos-3 {
+    font-size: 15px;
+    margin: 6%;
+
+  }
+  .pos-4{
+    /* flex: 1 1 center;
+    margin: 3px; */
+    font-size: 30px;
+    margin: 2%;
+  }
+
+  .pos-5{
+    font-size: 16px;
+    margin: 1%;
+
+  }
+  .pos-6 {
+    /* flex: 1 1 center;
+    margin: 3px; */
+    font-size: 30px;
+    margin: 1%;
+  }
+  .pos-7 {
     /* flex: 1 1 center;
     margin: 5px; */
     font-size: 35px;
     margin: 1%;
   }
-  .pos-three {
-    font-size: 15px;
-    margin: 6%;
-
-  }
-  .pos-four{
-    /* flex: 1 1 center;
-    margin: 3px; */
-    font-size: 30px;
-    margin: 2%;
-  }
-
-  .pos-five {
-    font-size: 16px;
-    margin: 1%;
-
-  }
-  .pos-six {
-    /* flex: 1 1 center;
-    margin: 3px; */
-    font-size: 30px;
-    margin: 1%;
-  }
-  .pos-eight {
+  .pos-8 {
     /* flex: 1 1 center;
     margin: 1px; */
     font-size: 45px;
@@ -116,51 +117,50 @@ body {
   }
 
 
-  .u-pos-eight {
-    font-size: 30px;
-    margin: 1%;
-  }
-
-  .u-pos-one {
+  .u-pos-1{
     font-size: 50px;
     margin: 5%;
   }
-  .u-pos-two {
+  .u-pos-2 {
     /* flex: 1 1 center;
     margin: 5px; */
     font-size: 35px;
     margin: 1%;
   }
-  .u-pos-seven {
-    font-size: 15px;
-    margin: 1%;
 
-  }
-  .u-pos-three{
+  .u-pos-3{
     /* flex: 1 1 center;
     margin: 3px; */
     font-size: 30px;
     margin: 2%;
   }
 
-  .u-pos-four {
+  .u-pos-4 {
     font-size: 16px;
     margin: 1%;
 
   }
-  .u-pos-five {
+  .u-pos-5{
     /* flex: 1 1 center;
     margin: 3px; */
     font-size: 30px;
     margin: 1%;
   }
-  .u-pos-six {
+  .u-pos-6{
     /* flex: 1 1 center;
     margin: 1px; */
     font-size: 35px;
     margin: 1%;
   }
+  .u-pos-7 {
+    font-size: 15px;
+    margin: 1%;
 
+  }
+.u-pos-8{
+    font-size: 30px;
+    margin: 1%;
+  }
 .score-class {
   color: white;
   font-family: VT;
