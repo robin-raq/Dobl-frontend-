@@ -53,9 +53,9 @@ function runTimer(element){
     element.innerText --
 
     if (element.innerText <= 0) {
-        
+
         stopGamePlay()
-        
+
         clearInterval(myTimer)
     }
 
@@ -72,33 +72,33 @@ function stopGamePlay(){
     scoreCard.className = "final-score-class"
 
     timer.remove()
-    
+
     userCard.remove()
     compCard.remove()
 
-    
+
     //view scores button
     let viewScoreButton = document.createElement("button")
     viewScoreButton.className = "large-end-button"
     viewScoreButton.innerText = "View High Scores"
     scoreButtonDiv.append(viewScoreButton)
-    
+
     //new game button
 
-    
+
     let newGameButton = document.createElement("button")
     newGameButton.className = "end_buttons"
     newGameButton.innerText = "Play Again"
     endButtonDiv.append(newGameButton)
 
-    
+
 
     // event listener to reset page
     newGameButton.addEventListener("click", () => {
         window.location.reload(true);
     })
-    
-    
+
+
 
 
 
@@ -108,91 +108,90 @@ function stopGamePlay(){
 
     let saveScoreForm = document.createElement("form")
     saveScoreForm.className = "score_form"
-    
+
     let inputArea = document.createElement("INPUT")
     inputArea.type = "text"
     inputArea.name = "player_name"
     inputArea.placeholder = "ENTER NAME"
     let submitButton = document.createElement("Input")
     submitButton.type = "submit"
-    
-    
-    
+
+
+
     saveScoreForm.append(inputArea, submitButton)
     scoreFormDiv.append(saveScoreForm)
     deckArea.append(scoreFormDiv, endButtonDiv, scoreButtonDiv)
 
-    saveScoreForm.addEventListener("submit", (evt) => {
-        evt.preventDefault()
-        playerName = evt.target.player_name.value
-        playerScore = parseInt(score.innerText)
+    // saveScoreForm.addEventListener("submit", (evt) => {
+    //     evt.preventDefault()
+    //     playerName = evt.target.player_name.value
+    //     playerScore = parseInt(score.innerText)
 
-        if (playerScore <= 300 ){
-            playerRewardId = 1
-        }
-        else if (playerScore <= 600 && playerScore > 300){
-            playerRewardId = 2
-        }
-        else if (playerScore <= 900 && playerScore > 600){
-            playerRewardId = 3
-        }
-        else if (playerScore <= 1200 && playerScore > 900){
-            playerRewardId = 4
-        }
-        else if (playerScore <= 1500 && playerScore > 1200){
-            playerRewardId = 5
-        }
-        else{
-            playerRewardId = 6
-        }
-        
-
-
-
-        fetch(`https://dobble-game.herokuapp.com/scores`, {
-          method:'POST',
-         headers: { 
-             'Content-type': 'application/json',
-             'accept': 'application/json'
-         },
-         body: JSON.stringify({
-            name: playerName,
-            value: playerScore,
-            reward_id: playerRewardId
-          })
-        })
-        .then(resp => resp.json())
-        .then(json_resp =>{
-            //console.log(json_resp.reward)
-            titleHOne.remove()
-            scoreCard.remove()
-            scoreFormDiv.remove()
-
-            newGameButton.className = "large-end-button"
+    //     if (playerScore <= 300 ){
+    //         playerRewardId = 1
+    //     }
+    //     else if (playerScore <= 600 && playerScore > 300){
+    //         playerRewardId = 2
+    //     }
+    //     else if (playerScore <= 900 && playerScore > 600){
+    //         playerRewardId = 3
+    //     }
+    //     else if (playerScore <= 1200 && playerScore > 900){
+    //         playerRewardId = 4
+    //     }
+    //     else if (playerScore <= 1500 && playerScore > 1200){
+    //         playerRewardId = 5
+    //     }
+    //     else{
+    //         playerRewardId = 6
+    //     }
 
 
 
 
-            let rewardTextDiv = document.createElement("div")
-            rewardTextDiv.className = "reward-text-div"
-            rewardTextDiv.innerText = `Good job. Here's some ${json_resp.reward.name}.`
-        
+    //     fetch(`https://dobble-game.herokuapp.com/scores`, {
+    //       method:'POST',
+    //      headers: {
+    //          'Content-type': 'application/json',
+    //          'accept': 'application/json'
+    //      },
+    //      body: JSON.stringify({
+    //         name: playerName,
+    //         value: playerScore,
+    //         reward_id: playerRewardId
+    //       })
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(json_resp =>{
+    //         //console.log(json_resp.reward)
+    //         titleHOne.remove()
+    //         scoreCard.remove()
+    //         scoreFormDiv.remove()
 
-            // rewardDiv.innerText = `Congratulations ${playerName}! You've earned ${json_resp.reward.name}. `
-            let rewardImg = document.createElement("img")
-            rewardImg.src = json_resp.reward.image
+    //         newGameButton.className = "large-end-button"
 
-            rewardDiv.append(rewardTextDiv, rewardImg)
-            deckArea.prepend(rewardDiv)
-            deckArea.append(scoreButtonDiv)
 
-        
-        })
-        
-    })
+
+
+    //         let rewardTextDiv = document.createElement("div")
+    //         rewardTextDiv.className = "reward-text-div"
+    //         rewardTextDiv.innerText = `Good job. Here's some ${json_resp.reward.name}.`
+
+
+    //         // rewardDiv.innerText = `Congratulations ${playerName}! You've earned ${json_resp.reward.name}. `
+    //         let rewardImg = document.createElement("img")
+    //         rewardImg.src = json_resp.reward.image
+
+    //         rewardDiv.append(rewardTextDiv, rewardImg)
+    //         deckArea.prepend(rewardDiv)
+    //         deckArea.append(scoreButtonDiv)
+
+
+    //     })
+
+    // })
 
 }
-
 
 deckArea.append(scoreCard, timer, compCard, userCard, resetButton)
 
@@ -213,7 +212,7 @@ function createCompCard(){
 
     let compPosThree = document.createElement("div")
     compPosThree.className = "pos-three"
-    
+
     let compPosFour = document.createElement("div")
     compPosFour.className = "pos-four"
 
@@ -237,7 +236,7 @@ function createCompCard(){
 function randomProperty(obj, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight) {
     var keys = Object.keys(obj)
     let arrayOfRandomEmojis = obj[keys[ keys.length * Math.random() << 0]]
-    
+
 
     getEachEmoji(arrayOfRandomEmojis, posOne, posTwo, posThree, posFour, posFive, posSix, posSeven, posEight)
     return arrayOfRandomEmojis
@@ -259,13 +258,13 @@ function createUserCard(){
     userCard.innerHTML = " "
     let userPosOne = document.createElement("div")
     userPosOne.className = "u-pos-one"
-    
+
     let userPosTwo = document.createElement("div")
     userPosTwo.className = "u-pos-two"
 
     let userPosThree = document.createElement("div")
     userPosThree.className = "u-pos-three"
-    
+
     let userPosFour = document.createElement("div")
     userPosFour.className = "u-pos-four"
 
@@ -302,12 +301,12 @@ userCard.addEventListener("click", (evt) => {
         console.log(scoreCard.innerText)
         createCompCard()
         createUserCard()
-    } 
+    }
     else {
         alert("that is not a match")
     }
-    
-    
+
+
 })
 
 scoreButtonDiv.addEventListener("click", (evt) => {
@@ -318,7 +317,7 @@ scoreButtonDiv.addEventListener("click", (evt) => {
     fetch("https://dobble-game.herokuapp.com/scores")
     .then(r => r.json())
     .then((allScores) => {
-        
+
       let sorted =  allScores.sort((a,b) => {
             return(b.value - a.value)
         })
@@ -327,7 +326,7 @@ scoreButtonDiv.addEventListener("click", (evt) => {
             displayScores(scoreObj)
         })
     })
-    
+
 })
 
 //function to display high scores
@@ -338,7 +337,7 @@ function displayScores(scoreObj){
     scoreButtonDiv.remove()
     console.log(scoreButtonDiv)
     // highScoresDiv.remove()
-    
+
     let scoreDiv = document.createElement("div")
         scoreDiv.className = "each-score-div"
 

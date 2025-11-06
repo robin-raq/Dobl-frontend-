@@ -14,7 +14,7 @@ body {
     height: 175px;
     border-radius: 100px;
   }
-  
+
   @font-face {
     font-family: Monofett;
     src: url(https://fonts.gstatic.com/s/monofett/v9/mFTyWbofw6zc9NtnW73Vsx0J0kJ6.woff2) format('woff');
@@ -23,12 +23,12 @@ body {
 
   @font-face {
     font-family: VT;
-    src: url(https://fonts.gstatic.com/s/vt323/v11/pxiKyp0ihIEF2isfFJXUdVNF.woff2) format('woff'); 
+    src: url(https://fonts.gstatic.com/s/vt323/v11/pxiKyp0ihIEF2isfFJXUdVNF.woff2) format('woff');
   }
 
   h1 {
     color: white;
-    font-family: VT; 
+    font-family: VT;
     text-align: center;
     font-size: 50px;
   }
@@ -67,14 +67,14 @@ body {
     width: 50%;
     border: 2px solid white;
     padding: 0 5px;
-    
-  } 
+
+  }
 
   .pos-one {
     font-size: 16px;
     margin: 2%;
-  } 
-  
+  }
+
   .pos-two {
     font-size: 50px;
     margin: 5%;
@@ -101,7 +101,7 @@ body {
     font-size: 16px;
     margin: 1%;
 
-  } 
+  }
   .pos-six {
     /* flex: 1 1 center;
     margin: 3px; */
@@ -114,13 +114,13 @@ body {
     font-size: 45px;
     margin: 3%;
   }
-  
+
 
   .u-pos-eight {
     font-size: 30px;
     margin: 1%;
-  } 
-  
+  }
+
   .u-pos-one {
     font-size: 50px;
     margin: 5%;
@@ -147,7 +147,7 @@ body {
     font-size: 16px;
     margin: 1%;
 
-  } 
+  }
   .u-pos-five {
     /* flex: 1 1 center;
     margin: 3px; */
@@ -245,8 +245,8 @@ input[type=submit] {
     font-size: 16px;
     font-family: VT;
     border-radius: 4px;
-  width: 100%;
-  margin: 8px;
+    margin: 8px;
+
 }
 
 .start-over-button {
@@ -259,7 +259,7 @@ input[type=submit] {
   display: inline-block;
   font-size: 16px;
   font-family: VT;
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 .reward-text-div {
