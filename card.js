@@ -121,6 +121,7 @@ function stopGamePlay(){
     // saveScoreForm.append(inputArea, submitButton)
     // scoreFormDiv.append(saveScoreForm)
     // deckArea.append(scoreFormDiv, endButtonDiv, scoreButtonDiv)
+    deckArea.append(endButtonDiv)
 
     // saveScoreForm.addEventListener("submit", (evt) => {
     //     evt.preventDefault()
