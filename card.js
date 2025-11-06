@@ -18,6 +18,7 @@ const scoreCard = createEl("div", "score-class", "Score: ")
 const score = createEl("span", null, "0")
 scoreCard.append(score)
 
+
 const resetButton = createEl("button", "start-over-button", "Start Over")
 resetButton.addEventListener("click", () => window.location.reload(true))
 
@@ -105,6 +106,8 @@ const handleCardClick= (evt) => {
         let scoreNum = parseInt(score.innerText)
         scoreNum += 100
         score.innerText = scoreNum
+        score.classList.add('animate');
+setTimeout(() => score.classList.remove('animate'), 500);
         createCompCard()
         createUserCard()
     }

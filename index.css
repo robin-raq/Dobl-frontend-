@@ -65,6 +65,15 @@ p.glow {
   width: 100%;
   max-width: 500px;
 }
+@keyframes scorePop {
+  0% { transform: scale(1); color: white; }
+  50% { transform: scale(1.5); color: #00ffcc; }
+  100% { transform: scale(1); color: white; }
+}
+
+.score-class span.animate {
+  animation: scorePop 0.5s ease;
+}
 
 #comp-circle {
     position: relative;
