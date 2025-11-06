@@ -78,10 +78,10 @@ function stopGamePlay(){
 
 
     //view scores button
-    let viewScoreButton = document.createElement("button")
-    viewScoreButton.className = "large-end-button"
-    viewScoreButton.innerText = "View High Scores"
-    scoreButtonDiv.append(viewScoreButton)
+    // let viewScoreButton = document.createElement("button")
+    // viewScoreButton.className = "large-end-button"
+    // viewScoreButton.innerText = "View High Scores"
+    // scoreButtonDiv.append(viewScoreButton)
 
     //new game button
 
@@ -106,21 +106,21 @@ function stopGamePlay(){
 
 
 
-    let saveScoreForm = document.createElement("form")
-    saveScoreForm.className = "score_form"
+    // let saveScoreForm = document.createElement("form")
+    // saveScoreForm.className = "score_form"
 
-    let inputArea = document.createElement("INPUT")
-    inputArea.type = "text"
-    inputArea.name = "player_name"
-    inputArea.placeholder = "ENTER NAME"
-    let submitButton = document.createElement("Input")
-    submitButton.type = "submit"
+    // let inputArea = document.createElement("INPUT")
+    // inputArea.type = "text"
+    // inputArea.name = "player_name"
+    // inputArea.placeholder = "ENTER NAME"
+    // let submitButton = document.createElement("Input")
+    // submitButton.type = "submit"
 
 
 
-    saveScoreForm.append(inputArea, submitButton)
-    scoreFormDiv.append(saveScoreForm)
-    deckArea.append(scoreFormDiv, endButtonDiv, scoreButtonDiv)
+    // saveScoreForm.append(inputArea, submitButton)
+    // scoreFormDiv.append(saveScoreForm)
+    // deckArea.append(scoreFormDiv, endButtonDiv, scoreButtonDiv)
 
     // saveScoreForm.addEventListener("submit", (evt) => {
     //     evt.preventDefault()
