@@ -141,7 +141,7 @@ function showBadMatchPopup() {
 
 function startTimer() {
   if (myTimer) clearInterval(myTimer);
-  myTimer = setInterval(() => runTimer(), 100);
+  myTimer = setInterval(() => runTimer(), 10);
 }
 
 function runTimer() {
@@ -216,6 +216,7 @@ function generateScoreForm() {
 
 async function saveScore(name, score){
   const now = new Date().toISOString();
+
   try{
     let scores = await getScores()
     console.log("Before fetch:", scores);
@@ -245,11 +246,14 @@ async function saveScore(name, score){
       return (b.score - a.score)
     })
   console.log("Updated scores:", scores);
+  displayScores(scores)
   return scores;
   } catch(err){
-    console.error("Error daving scores:", err);
+    console.error("Error saving scores:", err);
     return []
   }
+
+
 }
 
 async function getScores(){
@@ -261,5 +265,63 @@ async function getScores(){
     console.error("Error fetching scores:", err);
     return [];
   }
+
+}
+
+function displayScores(scoresArr=[]){
+   titleHOne.innerText = "🏆🏆🏆🏆🏆🏆 SCORE BOARD 🏆🏆🏆🏆🏆";
+   deckArea.innerHTML= ""
+   const scoreBoardDiv = createEl('div', 'score-board')
+
+   const scoresTable = createEl('table', "score-table")
+
+   //create header row
+   const headers = Object.keys(scoresArr[0])
+   const headerRow = createEl("tr")
+
+   headers.forEach((header) => {
+    console.log(header);
+    const tableHeader = createEl("th")
+    if(header !='id'){
+    tableHeader.textContent = header.toUpperCase()
+    headerRow.appendChild(tableHeader)
+    }
+   })
+  scoresTable.appendChild(headerRow)
+
+ //create body rows
+ scoresArr.forEach((score) => {
+  const tableRow = createEl('tr')
+  headers.forEach((key) => {
+    const tableData = createEl('td')
+    if(key!="id"){
+    let val = score[key]
+    // Optional: prettify date if detected
+      if (key.toLowerCase().includes("date") && val) {
+        val = new Date(val).toLocaleString(undefined, {
+          dateStyle: "short",
+          timeStyle: "short",
+        });
+      }
+    tableData.textContent = val
+    tableRow.appendChild(tableData)
+    }
+  })
+  scoresTable.appendChild(tableRow)
+ })
+
+ scoreBoardDiv.append(scoresTable)
+ deckArea.append(scoreBoardDiv)
+
+  //  scoresArr.forEach((scoreRecord) => {
+
+  //   const singleScoreDiv = createEl('div', 'each-score-div')
+  //   const scoreSpan =createEl("span")
+  //   let formattedDate = scoreRecord.date_created.toLocaleString()
+
+  //   scoreSpan.textContent = `${scoreRecord.name} scored ${scoreRecord.score} points on ${formattedDate}`
+  //   singleScoreDiv.append(scoreSpan)
+  //   deckArea.append(singleScoreDiv)
+  //  })
 
 }
