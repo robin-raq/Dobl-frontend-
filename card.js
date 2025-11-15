@@ -141,7 +141,7 @@ function showBadMatchPopup() {
 
 function startTimer() {
   if (myTimer) clearInterval(myTimer);
-  myTimer = setInterval(() => runTimer(), 10);
+  myTimer = setInterval(() => runTimer(), 1000);
 }
 
 function runTimer() {
