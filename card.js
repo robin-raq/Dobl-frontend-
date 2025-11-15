@@ -141,7 +141,7 @@ function showBadMatchPopup() {
 
 function startTimer() {
   if (myTimer) clearInterval(myTimer);
-  myTimer = setInterval(() => runTimer(), 1000);
+  myTimer = setInterval(() => runTimer(), 100);
 }
 
 function runTimer() {
@@ -193,22 +193,73 @@ function generateScoreForm() {
 
   const saveScoreButton = createEl("button", "end_buttons save", "Save Score");
   saveScoreButton.type = "submit";
-  saveScoreForm.addEventListener("submit", (evt) => {
-    evt.preventDefault()
-    saveScore()
-
-  })
   const newGameButton = createEl("button", "end_buttons", "Play Again!");
   newGameButton.addEventListener("click", () => {
     window.location.reload(true);
   });
+
   endButtonDiv.append(saveScoreButton, newGameButton);
   saveScoreForm.append(scoreFormLabel, inputArea, endButtonDiv);
   scoreFormDiv.append(saveScoreForm);
   deckArea.append(scoreFormDiv);
+
+  saveScoreForm.addEventListener("submit", (evt) => {
+    evt.preventDefault()
+    const playerScore = parseInt(score.innerText)
+    const playerName = inputArea.value.trim()
+    console.log(playerName, playerScore);
+    saveScore(playerName, playerScore)
+  })
+
+
 }
 
-function saveScore(){
+async function saveScore(name, score){
+  const now = new Date().toISOString();
+  try{
+    let scores = await getScores()
+    console.log("Before fetch:", scores);
 
-console.log("Score Saved");
+  const resp = await fetch(`https://sheetdb.io/api/v1/6e5u5wjlw0ozg`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'id': "INCREMENT",
+      'name': name,
+      'score': score,
+      'date_created': now
+    })
+  })
+  const result= await resp.json()
+  console.log("POST response:", result);
+  if(result.created===1){
+    console.log("Row saved. Fetching updated scores...");
+    scores = await getScores();
+  }else{
+    console.warn("Unexpected POST response:", result);
+  }
+    scores.sort((a,b)=>{
+      return (b.score - a.score)
+    })
+  console.log("Updated scores:", scores);
+  return scores;
+  } catch(err){
+    console.error("Error daving scores:", err);
+    return []
+  }
+}
+
+async function getScores(){
+ try {
+    const resp = await fetch(`https://sheetdb.io/api/v1/6e5u5wjlw0ozg`);
+    const scores = await resp.json();
+    return scores;
+  } catch (err) {
+    console.error("Error fetching scores:", err);
+    return [];
+  }
+
 }
